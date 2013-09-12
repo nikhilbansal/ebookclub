@@ -27,6 +27,10 @@ public class Controller {
     public void joinClub(Request request, Response response){
         String clubname = request.getRawHeader(Constants.CLUB_NAME);
         String accountid = request.getRawHeader(Constants.ACCOUNT_ID);
+        HelperMethods helperMethods = new HelperMethods();
+        if(helperMethods.isClubIdPresent(clubname)){
+            helperMethods.joinClub(accountid, clubname);
+        }
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 

@@ -1,3 +1,7 @@
+create database ebooksclub;
+
+use ebooksclub;
+
 create table club_master (club_id int primary key auto_increment ,
                         club_name varchar(20) not null unique,
                         fsn varchar(20),
