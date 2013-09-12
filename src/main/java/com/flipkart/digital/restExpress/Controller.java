@@ -21,6 +21,7 @@ public class Controller {
         String organizer = request.getRawHeader(Constants.ACCOUNT_ID);
         String fsn = request.getRawHeader(Constants.FSN);
         new HelperMethods().createNewClub(clubname, fsn, "public", organizer);
+        response.setBody("You successfully created the club " + clubname);
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 
@@ -29,6 +30,7 @@ public class Controller {
         String accountid = request.getRawHeader(Constants.ACCOUNT_ID);
         HelperMethods helperMethods = new HelperMethods();
         helperMethods.joinClub(accountid, clubname, "member");
+        response.setBody("You successfully joined the club " + clubname);
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 
