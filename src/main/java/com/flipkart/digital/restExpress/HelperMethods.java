@@ -56,7 +56,7 @@ public class HelperMethods {
 
     public static void main(String[] args) {
         HelperMethods helperMethods = new HelperMethods();
-        helperMethods.createNewClub("5678","5678");
+        helperMethods.createNewClub("clubname", "5678","5678");
 
     }
 

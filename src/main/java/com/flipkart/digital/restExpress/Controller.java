@@ -20,6 +20,7 @@ public class Controller {
         String clubname = request.getRawHeader(Constants.CLUB_NAME);
         String organizer = request.getRawHeader(Constants.ACCOUNT_ID);
         String fsn = request.getRawHeader(Constants.FSN);
+        new HelperMethods().createNewClub(clubname, organizer, fsn);
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 
