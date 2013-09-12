@@ -2,7 +2,11 @@ package com.flipkart.digital.restExpress;
 
 import com.flipkart.digital.DatabaseStore.DBConnection;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class HelperMethods {
 
@@ -16,7 +20,12 @@ public class HelperMethods {
     }
 
     public void joinClub(String account_id, String club_id) {
-
+        String query = "insert into club_members(account_id,club_id) values(?,?)";
+        try {
+            insertOrUpdateRow(query, account_id, club_id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public Integer insertOrUpdateRow(String query, Object... values) {
         Connection connection;
@@ -53,10 +62,35 @@ public class HelperMethods {
         return null;
 
     }
+    private Boolean isClubIdPresent(String club_id) {
+        try {
+            String query = "select * from club_master where club_id='"+club_id+"'";
+            Connection connection = DBConnection.INSTANCE.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet == null) return false;
+            if(resultSet.next()) {
+                return true;
+            }
+
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
         HelperMethods helperMethods = new HelperMethods();
-        helperMethods.createNewClub("5678","5678");
+        System.out.println(helperMethods.isClubIdPresent("1234"));
 
     }
 

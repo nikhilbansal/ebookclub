@@ -1,3 +1,5 @@
 ebookclub.ipr
 ebookclub.iml
 ebookclub.iws
+.idea/*
+target/
