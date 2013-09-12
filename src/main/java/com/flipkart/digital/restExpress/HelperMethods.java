@@ -62,7 +62,7 @@ public class HelperMethods {
         return null;
 
     }
-    private Boolean isClubIdPresent(String club_id) {
+    public Boolean isClubIdPresent(String club_id) {
         try {
             String query = "select * from club_master where club_id='"+club_id+"'";
             Connection connection = DBConnection.INSTANCE.getConnection();

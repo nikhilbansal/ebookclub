@@ -1,6 +1,7 @@
 package com.flipkart.digital.restExpress;
 
 import com.strategicgains.restexpress.*;
+import com.strategicgains.restexpress.plugin.cors.CorsHeaderPlugin;
 import com.sun.org.apache.bcel.internal.classfile.Constant;
 import org.jboss.netty.handler.codec.http.HttpMethod;
 
@@ -22,6 +23,8 @@ public class RestExpressManager {
 		    .putResponseProcessor(Format.WRAPPED_JSON, ResponseProcessors.wrappedJson())
 		    .putResponseProcessor(Format.WRAPPED_XML, ResponseProcessors.wrappedXml());
 
+        new CorsHeaderPlugin("*")                    // Array of domain strings.
+                .register(server);
 		defineRoutes(server);
 
 		mapExceptions(server);
