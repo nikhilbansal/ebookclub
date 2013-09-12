@@ -6,16 +6,16 @@ import java.sql.*;
 
 public class HelperMethods {
 
-    public void createNewClub(String fsn, String accoutId){
-        String query = "insert into club_master(fsn, account_id) values (?,?)";
+    public void createNewClub(String club_id, String fsn, String accoutId){
+        String query = "insert into club_master(club_id, fsn, account_id) values (?,?,?)";
         try {
-            insertOrUpdateRow(query, fsn, accoutId);
+            insertOrUpdateRow(query, club_id, fsn, accoutId);
         } catch (Exception e) {
            e.printStackTrace();
         }
     }
 
-    public void joinClub() {
+    public void joinClub(String account_id, String club_id) {
 
     }
     public Integer insertOrUpdateRow(String query, Object... values) {
