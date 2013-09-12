@@ -1,3 +1,5 @@
-create table club_master ( club_id varchar(20) primary key , FSN varchar(20), account_id varchar(100));
+create table club_master (club_id int primary key auto_increment , club_name varchar(20) not null unique, fsn varchar(20), kind varchar(20));
 
-create table club_members (club_id varchar(20) , account_id varchar(100),PRIMARY KEY (club_id, account_id), FOREIGN KEY (club_id) REFERENCES club_master(club_id));
+create table club_members (club_id int , account_id varchar(100), role varchar(20), PRIMARY KEY (club_id, account_id), FOREIGN KEY (club_id) REFERENCES club_master(club_id));
+
+create table users(account_id int auto_increment PRIMARY KEY, name varchar(30));
