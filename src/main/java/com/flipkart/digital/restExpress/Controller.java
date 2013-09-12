@@ -36,7 +36,8 @@ public class Controller {
         String clubname = request.getRawHeader(Constants.CLUB_NAME);
         HelperMethods helperMethods = new HelperMethods();
         int clubId = helperMethods.getClubId(clubname);
-        System.out.println(helperMethods.getMembers(clubId+""));
+        //System.out.println(helperMethods.getMembers(clubId+""));
+        response.setBody(helperMethods.getMembers(clubId+""));
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 
@@ -44,7 +45,8 @@ public class Controller {
         String clubname = request.getRawHeader(Constants.CLUB_NAME);
         HelperMethods helperMethods = new HelperMethods();
         int clubId = helperMethods.getClubId(clubname);
-        System.out.println(helperMethods.getOrganiser(clubId+""));
+        //System.out.println(helperMethods.getOrganiser(clubId+""));
+        response.setBody(helperMethods.getOrganiser(clubId+""));
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 }
