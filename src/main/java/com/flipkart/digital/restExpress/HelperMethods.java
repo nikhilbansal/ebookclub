@@ -2,6 +2,7 @@ package com.flipkart.digital.restExpress;
 
 import com.flipkart.digital.DatabaseStore.DBConnection;
 import com.flipkart.digital.models.ClubMember;
+import com.flipkart.digital.models.MemberDetail;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -174,9 +175,38 @@ public class HelperMethods {
         return false;
     }
 
+    public MemberDetail getClubdetails(String account_id, String fsn) {
+        String query =" select cmas.club_name, cmem.role, u.name from club_master cmas, club_members cmem, users u where cmem.account_id= '"+account_id+"' and cmas.fsn='"+fsn+"' and cmem.club_id = cmas.club_id and u.account_id = cmem.account_id";
+
+        try {
+            Connection connection = DBConnection.INSTANCE.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet == null) return null;
+            if (resultSet.next()) {
+                MemberDetail memberDetail  = new MemberDetail();
+                memberDetail.setName(resultSet.getString(1));
+                memberDetail.setRole(resultSet.getString(2));
+                return memberDetail;
+            }
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         HelperMethods helperMethods = new HelperMethods();
-        System.out.println(helperMethods.isClubIdPresent("3"));
+       helperMethods.joinClub("1","nagas","member");
 
     }
 
