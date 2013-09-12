@@ -5,15 +5,15 @@ package com.flipkart.digital.models;
  * Date: 13/09/13
  */
 public class ClubMember {
-    public String name;
+    public String account_id;
     public String role;
 
-    public String getName() {
-        return name;
+    public String getAccount_id() {
+        return account_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAccount_id(String account_id) {
+        this.account_id = account_id;
     }
 
     public String getRole() {
@@ -27,7 +27,7 @@ public class ClubMember {
     @Override
     public String toString() {
         return "ClubMember{" +
-                "name='" + name + '\'' +
+                "account_id='" + account_id + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }
