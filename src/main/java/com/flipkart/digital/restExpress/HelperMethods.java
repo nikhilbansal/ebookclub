@@ -61,7 +61,7 @@ public class HelperMethods {
 
     public List<ClubMember> getMembers(String clubId) {
         List<ClubMember> list = new ArrayList<ClubMember>();
-        String query = "select u.name,cm.role from club_members cm, users u where club_id='"+clubId+"' and cm.account_id=u.account_id";
+        String query = "select cm.account_id,cm.role from club_members cm where club_id='"+clubId+"'";
 
         try {
             Connection connection = DBConnection.INSTANCE.getConnection();
@@ -70,7 +70,7 @@ public class HelperMethods {
             if (resultSet == null) return null;
             while(resultSet.next()) {
                 ClubMember clubMember = new ClubMember();
-                clubMember.setName(resultSet.getString(1));
+                clubMember.setAccount_id(resultSet.getString(1));
                 clubMember.setRole(resultSet.getString(2));
                 list.add(clubMember);
             }
@@ -90,7 +90,7 @@ public class HelperMethods {
     }
 
     public String getOrganiser(String clubId) {
-        String query = "select name from club_members cm, users u where club_id='"+clubId+"' and cm.role= 'owner' and cm.account_id=u.account_id";
+        String query = "select account_id from club_members where club_id='"+clubId+"' and role= 'owner'";
         String organiser = null;
         try {
             Connection connection = DBConnection.INSTANCE.getConnection();
@@ -98,7 +98,7 @@ public class HelperMethods {
             ResultSet resultSet = statement.executeQuery(query);
             if (resultSet == null) return null;
             if(resultSet.next()) {
-               organiser = resultSet.getString("name");
+               organiser = resultSet.getString("account_id");
             }
         } catch(SQLException ex) {
             ex.printStackTrace();
@@ -149,7 +149,7 @@ public class HelperMethods {
         return null;
 
     }
-    public Boolean isClubIdPresent(String club_id) {
+    private Boolean isClubIdPresent(String club_id) {
         try {
             String query = "select * from club_master where club_id='"+club_id+"'";
             Connection connection = DBConnection.INSTANCE.getConnection();
@@ -176,7 +176,7 @@ public class HelperMethods {
     }
 
     public MemberDetail getClubdetails(String account_id, String fsn) {
-        String query =" select cmas.club_name, cmem.role, u.name from club_master cmas, club_members cmem, users u where cmem.account_id= '"+account_id+"' and cmas.fsn='"+fsn+"' and cmem.club_id = cmas.club_id and u.account_id = cmem.account_id";
+        String query =" select cmas.club_name, cmem.role, cmem.account_id from club_master cmas, club_members cmem where cmem.account_id= '"+account_id+"' and cmas.fsn='"+fsn+"' and cmem.club_id = cmas.club_id";
 
         try {
             Connection connection = DBConnection.INSTANCE.getConnection();
@@ -185,8 +185,9 @@ public class HelperMethods {
             if (resultSet == null) return null;
             if (resultSet.next()) {
                 MemberDetail memberDetail  = new MemberDetail();
-                memberDetail.setName(resultSet.getString(1));
+                memberDetail.setClub_name(resultSet.getString(1));
                 memberDetail.setRole(resultSet.getString(2));
+                memberDetail.setAccount_id(resultSet.getString(3));
                 return memberDetail;
             }
         } catch(SQLException ex) {
@@ -205,7 +206,7 @@ public class HelperMethods {
     }
 
     public static void main(String[] args) {
-        HelperMethods helperMethods = new HelperMethods();
+       HelperMethods helperMethods = new HelperMethods();
        helperMethods.joinClub("1","nagas","member");
 
     }
