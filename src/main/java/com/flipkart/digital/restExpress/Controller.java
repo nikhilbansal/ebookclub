@@ -20,7 +20,7 @@ public class Controller {
         String clubname = request.getRawHeader(Constants.CLUB_NAME);
         String organizer = request.getRawHeader(Constants.ACCOUNT_ID);
         String fsn = request.getRawHeader(Constants.FSN);
-        new HelperMethods().createNewClub(clubname, organizer, fsn);
+        new HelperMethods().createNewClub(clubname, fsn, "public", organizer);
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 
@@ -28,19 +28,23 @@ public class Controller {
         String clubname = request.getRawHeader(Constants.CLUB_NAME);
         String accountid = request.getRawHeader(Constants.ACCOUNT_ID);
         HelperMethods helperMethods = new HelperMethods();
-        if(helperMethods.isClubIdPresent(clubname)){
-            helperMethods.joinClub(accountid, clubname);
-        }
+        helperMethods.joinClub(accountid, clubname, "member");
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 
     public void getMembers(Request request, Response response){
         String clubname = request.getRawHeader(Constants.CLUB_NAME);
+        HelperMethods helperMethods = new HelperMethods();
+        int clubId = helperMethods.getClubId(clubname);
+        System.out.println(helperMethods.getMembers(clubId+""));
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 
     public void getAdmin(Request request, Response response){
         String clubname = request.getRawHeader(Constants.CLUB_NAME);
+        HelperMethods helperMethods = new HelperMethods();
+        int clubId = helperMethods.getClubId(clubname);
+        System.out.println(helperMethods.getOrganiser(clubId+""));
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 }

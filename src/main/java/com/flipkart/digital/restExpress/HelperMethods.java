@@ -33,7 +33,7 @@ public class HelperMethods {
         }
     }
 
-    private int getClubId(String club_name) {
+    public int getClubId(String club_name) {
         try {
             String query = "select club_id from club_master where club_name='"+club_name+"'";
             Connection connection = DBConnection.INSTANCE.getConnection();
