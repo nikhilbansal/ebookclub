@@ -1,6 +1,7 @@
 package com.flipkart.digital.restExpress;
 
 import com.strategicgains.restexpress.*;
+import com.sun.org.apache.bcel.internal.classfile.Constant;
 import org.jboss.netty.handler.codec.http.HttpMethod;
 
 /**
@@ -29,15 +30,26 @@ public class RestExpressManager {
 	}
 
     private void defineRoutes(RestExpress server) throws Exception {
-        server.uri("/newClub/{organizer}/{fsn}.{format}", Controller.class)
-        .action("newClub", HttpMethod.POST).flag(Flags.Cache.DONT_CACHE);
 
-//        server.uri(Constants.GET_ALL_APPLICABLE_OFFERS_URI, RestExpressController.INSTANCE)
-//        .action(Constants.GET_ALL_APPLICABLE_OFFERS, HttpMethod.POST).flag(Flags.Cache.DONT_CACHE);
+        server.uri("/newclub/{"+Constants.CLUB_NAME+"}/{"+Constants.ACCOUNT_ID+"}/{"+Constants.FSN+"}.{format}", new Controller())
+        .action("createNewClub", HttpMethod.POST).flag(Flags.Cache.DONT_CACHE);
+
+        server.uri("/joinclub/{"+Constants.CLUB_NAME+"}/{"+Constants.ACCOUNT_ID+"}.{format}", new Controller())
+        .action("joinClub", HttpMethod.POST).flag(Flags.Cache.DONT_CACHE);
+
+        server.uri("/getmembers/{"+Constants.CLUB_NAME+"}.{format}", new Controller())
+        .action("getMembers", HttpMethod.GET);
+
+        server.uri("/getadmin/{"+Constants.CLUB_NAME+"}.{format}", new Controller())
+        .action("getAdmin", HttpMethod.GET);
 	}
 
 	/**
      * @param server
      */
     private void mapExceptions(RestExpress server){}
+
+    public static void main(String [] args) throws Exception {
+        new RestExpressManager().initialize();
+    }
 }
