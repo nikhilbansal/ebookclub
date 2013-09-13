@@ -58,8 +58,8 @@ public class Controller {
         HelperMethods helperMethods = new HelperMethods();
         int clubId = helperMethods.getClubId(clubname);
         String bId = helperMethods.getBroadcastId(clubId+"");
-        String iframe = "<iframe width=\"400\" height=\"400\" src=\"http://www.ustream.tv/embed/"+bId+"?v=3&amp;wmode=direct\" scrolling=\"no\" frameborder=\"0\" style=\"border: 0px none transparent;\">    </iframe>";
-        response.setBody(iframe);
+        //String iframe = "<iframe width=\"300\" height=\"300\" src=\"http://www.ustream.tv/embed/"+bId+"?v=3&amp;wmode=direct\" scrolling=\"no\" frameborder=\"0\" style=\"border: 0px none transparent;\">    </iframe>";
+        response.setBody(bId);
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 
@@ -69,8 +69,8 @@ public class Controller {
         HelperMethods helperMethods = new HelperMethods();
         int clubId = helperMethods.getClubId(clubname);
         String bId = helperMethods.getBroadcastId(clubId+"");
-        String iframe = "<iframe width=\"468\" scrolling=\"no\" height=\"586\" frameborder=\"0\" style=\"border: 0px none transparent;\" src=\"http://www.ustream.tv/socialstream/"+bId+"\"></iframe>";
-        response.setBody(iframe);
+        //String iframe = "<iframe width=\"300\" scrolling=\"no\" height=\"300\" frameborder=\"0\" style=\"border: 0px none transparent;\" src=\"http://www.ustream.tv/socialstream/"+bId+"\"></iframe>";
+        response.setBody(bId+"");
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 
