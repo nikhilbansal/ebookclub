@@ -57,8 +57,7 @@ public class Controller {
         String clubname = request.getRawHeader(Constants.CLUB_NAME);
         HelperMethods helperMethods = new HelperMethods();
         int clubId = helperMethods.getClubId(clubname);
-        String bId=null;
-        //String bId = helperMethods.getClubId(clubId);
+        String bId = helperMethods.getBroadcastId(clubId+"");
         String iframe = "<iframe width=\"400\" height=\"400\" src=\"http://www.ustream.tv/embed/"+bId+"?v=3&amp;wmode=direct\" scrolling=\"no\" frameborder=\"0\" style=\"border: 0px none transparent;\">    </iframe>";
         response.setBody(iframe);
         response.setResponseStatus(HttpResponseStatus.OK);
@@ -69,8 +68,7 @@ public class Controller {
         String clubname = request.getRawHeader(Constants.CLUB_NAME);
         HelperMethods helperMethods = new HelperMethods();
         int clubId = helperMethods.getClubId(clubname);
-        String bId=null;
-        //String bId = helperMethods.getClubId(clubId);
+        String bId = helperMethods.getBroadcastId(clubId+"");
         String iframe = "<iframe width=\"468\" scrolling=\"no\" height=\"586\" frameborder=\"0\" style=\"border: 0px none transparent;\" src=\"http://www.ustream.tv/socialstream/"+bId+"\"></iframe>";
         response.setBody(iframe);
         response.setResponseStatus(HttpResponseStatus.OK);
