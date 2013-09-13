@@ -64,7 +64,7 @@ public class Controller {
     }
 
 
-    public void getAudio(Request request, Response response){
+    public void getChat(Request request, Response response){
         String clubname = request.getRawHeader(Constants.CLUB_NAME);
         HelperMethods helperMethods = new HelperMethods();
         int clubId = helperMethods.getClubId(clubname);
