@@ -205,6 +205,32 @@ public class HelperMethods {
         return null;
     }
 
+    public String getBroadcastId(String club_id) {
+        try {
+            String query = "select bid from club_master where club_id='"+club_id+"'";
+            Connection connection = DBConnection.INSTANCE.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet == null) return null;
+            if(resultSet.next()) {
+                return resultSet.getString(1);
+            }
+
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
        HelperMethods helperMethods = new HelperMethods();
        helperMethods.joinClub("1","nagas","member");
