@@ -1,6 +1,7 @@
 package com.flipkart.digital.restExpress;
 
 import com.flipkart.digital.DatabaseStore.DBConnection;
+import com.flipkart.digital.models.ClubDetail;
 import com.flipkart.digital.models.ClubMember;
 import com.flipkart.digital.models.MemberDetail;
 
@@ -229,6 +230,39 @@ public class HelperMethods {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<ClubDetail> getClubs(String fsn) {
+        List<ClubDetail> list = new ArrayList<ClubDetail>();
+        String query = "select club_id, club_name, kind, bid from club_members cm where fsn='"+fsn+"'";
+
+        try {
+            Connection connection = DBConnection.INSTANCE.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet == null) return null;
+            while(resultSet.next()) {
+                ClubDetail clubDetail = new ClubDetail();
+                clubDetail.setClubId(resultSet.getString(1));
+                clubDetail.setClubName(resultSet.getString(2));
+                clubDetail.setKind(resultSet.getString(3));
+                clubDetail.setBid(resultSet.getString(4));
+                clubDetail.setFsn(fsn);
+                list.add(clubDetail);
+            }
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return list;
     }
 
     public static void main(String[] args) {
