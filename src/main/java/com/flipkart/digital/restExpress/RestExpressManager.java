@@ -51,6 +51,10 @@ public class RestExpressManager {
 
         server.uri("/getchat/{"+Constants.CLUB_NAME+"}.{format}", new Controller())
         .action("getChat", HttpMethod.GET);
+
+        server.uri("/getclubs/{"+Constants.FSN+"}.{format}", new Controller())
+        .action("getClubs", HttpMethod.GET);
+
 	}
 
 	/**
