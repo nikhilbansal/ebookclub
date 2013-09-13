@@ -2,6 +2,7 @@ package com.flipkart.digital.restExpress;
 
 import com.strategicgains.restexpress.Request;
 import com.strategicgains.restexpress.Response;
+import com.sun.tools.corba.se.idl.toJavaPortable.StringGen;
 import org.jboss.netty.handler.codec.http.HttpResponseStatus;
 
 import java.io.IOException;
@@ -48,7 +49,31 @@ public class Controller {
         HelperMethods helperMethods = new HelperMethods();
         int clubId = helperMethods.getClubId(clubname);
         //System.out.println(helperMethods.getOrganiser(clubId+""));
-        response.setBody(helperMethods.getOrganiser(clubId+""));
+        response.setBody(helperMethods.getOrganiser(clubId + ""));
         response.setResponseStatus(HttpResponseStatus.OK);
     }
+
+    public void getVideo(Request request, Response response){
+        String clubname = request.getRawHeader(Constants.CLUB_NAME);
+        HelperMethods helperMethods = new HelperMethods();
+        int clubId = helperMethods.getClubId(clubname);
+        String bId=null;
+        //String bId = helperMethods.getClubId(clubId);
+        String iframe = "<iframe width=\"400\" height=\"400\" src=\"http://www.ustream.tv/embed/"+bId+"?v=3&amp;wmode=direct\" scrolling=\"no\" frameborder=\"0\" style=\"border: 0px none transparent;\">    </iframe>";
+        response.setBody(iframe);
+        response.setResponseStatus(HttpResponseStatus.OK);
+    }
+
+
+    public void getAudio(Request request, Response response){
+        String clubname = request.getRawHeader(Constants.CLUB_NAME);
+        HelperMethods helperMethods = new HelperMethods();
+        int clubId = helperMethods.getClubId(clubname);
+        String bId=null;
+        //String bId = helperMethods.getClubId(clubId);
+        String iframe = "<iframe width=\"468\" scrolling=\"no\" height=\"586\" frameborder=\"0\" style=\"border: 0px none transparent;\" src=\"http://www.ustream.tv/socialstream/"+bId+"\"></iframe>";
+        response.setBody(iframe);
+        response.setResponseStatus(HttpResponseStatus.OK);
+    }
+
 }
