@@ -45,6 +45,16 @@ public class RestExpressManager {
 
         server.uri("/getadmin/{"+Constants.CLUB_NAME+"}.{format}", new Controller())
         .action("getAdmin", HttpMethod.GET);
+
+        server.uri("/getvideo/{"+Constants.CLUB_NAME+"}.{format}", new Controller())
+        .action("getVideo", HttpMethod.GET);
+
+        server.uri("/getchat/{"+Constants.CLUB_NAME+"}.{format}", new Controller())
+        .action("getChat", HttpMethod.GET);
+
+        server.uri("/getclubs/{"+Constants.FSN+"}.{format}", new Controller())
+        .action("getClubs", HttpMethod.GET);
+
 	}
 
 	/**

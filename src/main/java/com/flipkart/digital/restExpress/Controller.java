@@ -2,6 +2,7 @@ package com.flipkart.digital.restExpress;
 
 import com.strategicgains.restexpress.Request;
 import com.strategicgains.restexpress.Response;
+import com.sun.tools.corba.se.idl.toJavaPortable.StringGen;
 import org.jboss.netty.handler.codec.http.HttpResponseStatus;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class Controller {
         String organizer = request.getRawHeader(Constants.ACCOUNT_ID);
         String fsn = request.getRawHeader(Constants.FSN);
         new HelperMethods().createNewClub(clubname, fsn, "public", organizer);
+        response.setBody("You successfully created the club " + clubname);
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 
@@ -29,6 +31,7 @@ public class Controller {
         String accountid = request.getRawHeader(Constants.ACCOUNT_ID);
         HelperMethods helperMethods = new HelperMethods();
         helperMethods.joinClub(accountid, clubname, "member");
+        response.setBody("You successfully joined the club " + clubname);
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 
@@ -36,7 +39,8 @@ public class Controller {
         String clubname = request.getRawHeader(Constants.CLUB_NAME);
         HelperMethods helperMethods = new HelperMethods();
         int clubId = helperMethods.getClubId(clubname);
-        System.out.println(helperMethods.getMembers(clubId+""));
+        //System.out.println(helperMethods.getMembers(clubId+""));
+        response.setBody(helperMethods.getMembers(clubId+""));
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 
@@ -44,7 +48,38 @@ public class Controller {
         String clubname = request.getRawHeader(Constants.CLUB_NAME);
         HelperMethods helperMethods = new HelperMethods();
         int clubId = helperMethods.getClubId(clubname);
-        System.out.println(helperMethods.getOrganiser(clubId+""));
+        //System.out.println(helperMethods.getOrganiser(clubId+""));
+        response.setBody(helperMethods.getOrganiser(clubId + ""));
         response.setResponseStatus(HttpResponseStatus.OK);
     }
+
+    public void getVideo(Request request, Response response){
+        String clubname = request.getRawHeader(Constants.CLUB_NAME);
+        HelperMethods helperMethods = new HelperMethods();
+        int clubId = helperMethods.getClubId(clubname);
+        String bId = helperMethods.getBroadcastId(clubId+"");
+        //String iframe = "<iframe width=\"300\" height=\"300\" src=\"http://www.ustream.tv/embed/"+bId+"?v=3&amp;wmode=direct\" scrolling=\"no\" frameborder=\"0\" style=\"border: 0px none transparent;\">    </iframe>";
+        response.setBody(bId);
+        response.setResponseStatus(HttpResponseStatus.OK);
+    }
+
+
+    public void getChat(Request request, Response response){
+        String clubname = request.getRawHeader(Constants.CLUB_NAME);
+        HelperMethods helperMethods = new HelperMethods();
+        int clubId = helperMethods.getClubId(clubname);
+        String bId = helperMethods.getBroadcastId(clubId+"");
+        //String iframe = "<iframe width=\"300\" scrolling=\"no\" height=\"300\" frameborder=\"0\" style=\"border: 0px none transparent;\" src=\"http://www.ustream.tv/socialstream/"+bId+"\"></iframe>";
+        response.setBody(bId+"");
+        response.setResponseStatus(HttpResponseStatus.OK);
+    }
+
+    public void getClubs(Request request, Response response){
+        String fsn = request.getRawHeader(Constants.FSN);
+        HelperMethods helperMethods = new HelperMethods();
+        //helperMethods.getClubs(fsn);
+        response.setBody("");
+        response.setResponseStatus(HttpResponseStatus.OK);
+    }
+
 }
