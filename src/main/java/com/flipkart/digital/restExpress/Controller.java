@@ -77,8 +77,7 @@ public class Controller {
     public void getClubs(Request request, Response response){
         String fsn = request.getRawHeader(Constants.FSN);
         HelperMethods helperMethods = new HelperMethods();
-        //helperMethods.getClubs(fsn);
-        response.setBody("");
+        response.setBody(helperMethods.getClubs(fsn));
         response.setResponseStatus(HttpResponseStatus.OK);
     }
 
